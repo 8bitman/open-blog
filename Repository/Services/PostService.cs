@@ -37,5 +37,13 @@ namespace Repository.Services
         public Task<IPagedList<TR>> FindByAuthorAs<TR>(long author, int pageIndex = 1, int pageLimit = 10) =>
             Set.Where(p => p.AuthorId == author).ProjectTo<TR>(Mapper.ConfigurationProvider)
                 .ToPagedListAsync(pageIndex, pageLimit);
+
+        public override Task Save(Post entity)
+        {
+            if(string.IsNullOrEmpty(entity.Uri))
+                entity.Uri = entity.Title;
+                
+            return base.Save(entity);
+        }
     }
 }
