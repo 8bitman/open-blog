@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repository.Extensions;
@@ -32,21 +33,18 @@ namespace Repository.Services
 
         public virtual Task<T> FindById(long id) => Set.FindAsync(id).AsTask();
 
-        public virtual Task<TR> FindByIdAs<TR>(long id) => throw new NotImplementedException();
+        public virtual Task<TR> FindByIdAs<TR>(long id) => Set.Where(e => e.Id == id)
+            .ProjectTo<TR>(Mapper.ConfigurationProvider).FirstOrDefaultAsync();
 
         public virtual Task<List<T>> GetAll() => Set.ToListAsync();
 
-        public virtual Task<List<TR>> GetAllAs<TR>() => throw new NotImplementedException();
+        public virtual Task<List<TR>> GetAllAs<TR>() => Set.ProjectTo<TR>(Mapper.ConfigurationProvider).ToListAsync();
 
-        public virtual Task<IPagedList<T>> Get(int pageIndex = 1, int pageLimit = 10)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual Task<IPagedList<T>> Get(int pageIndex = 1, int pageLimit = 10) =>
+            Set.ToPagedListAsync(pageIndex, pageLimit);
 
-        public virtual Task<IPagedList<TR>> GetAs<TR>(int pageIndex = 1, int pageLimit = 10)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual Task<IPagedList<TR>> GetAs<TR>(int pageIndex = 1, int pageLimit = 10) =>
+            Set.ProjectTo<TR>(Mapper.ConfigurationProvider).ToPagedListAsync(pageIndex, pageLimit);
 
         public virtual async Task Save(T entity)
         {

@@ -6,3 +6,4 @@
     - Usuários
  - Estruturas básicas para consultas
  - Mapeamento direto ao banco de dados
+ - Estruturas de consulta e mapeamento.
