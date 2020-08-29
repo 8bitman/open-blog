@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class Post : BaseRepository
+    public class Post : BaseEntity
     {
         public string Title { get; set; }
         public string Excerpt { get; set; }

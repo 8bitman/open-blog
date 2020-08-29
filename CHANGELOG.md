@@ -4,3 +4,5 @@
     - Publicações
     - Categorias
     - Usuários
+ - Estruturas básicas para consultas
+ - Mapeamento direto ao banco de dados
