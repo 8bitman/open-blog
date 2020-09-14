@@ -21,10 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
-    </ItemGroup>
-
-    <ItemGroup>
       <_ContentIncludedByDefault Remove="ClientApp\config\ember-cli-update.json" />
       <_ContentIncludedByDefault Remove="ClientApp\config\optional-features.json" />
       <_ContentIncludedByDefault Remove="ClientApp\package-lock.json" />
